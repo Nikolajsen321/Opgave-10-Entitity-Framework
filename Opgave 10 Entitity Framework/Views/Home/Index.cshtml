@@ -1,0 +1,34 @@
+﻿@model List<Ejer> 
+@using (Html.BeginForm("Index", "Home"))
+{
+	@if(Model != null){
+		@Html.DropDownList("EjerNavn",new SelectList( Model.Select(x =>   x.Navn ),"Hej"));
+
+	
+
+	}
+	 
+	<button type ="submit"> submit </button>
+}
+
+	@if (ViewBag.Biler != null)
+	{
+		foreach(Bil bil in ViewBag.Biler)
+		{
+			<ul>
+				<li>
+					@bil.Name  @bil.EjerID   
+					@using (Html.BeginForm("EditBil", "Home", FormMethod.Post))
+					{
+
+						<!-- Felt til at ændre bilens navn -->
+						<input type="text" name="NewBilName" value="@bil.Name" />
+						<!-- Skjult felt til at sende BilID -->
+						<input type="hidden" name="BilID" value="@bil.BILID" />
+						<button type="submit">Opdater Navn</button>
+					}
+				</li>
+			</ul>
+		
+	}
+}
